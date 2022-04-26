@@ -1,5 +1,6 @@
 import { types } from "mobx-state-tree";
 import Reactotron from "reactotron-react-js";
+import { values } from "mobx";
 
 export const Todo = types
   .model({
@@ -25,6 +26,14 @@ const RootStore = types
     users: types.map(User),
     todos: types.optional(types.map(Todo), {}),
   })
+  .views((self) => ({
+    get pendingCount() {
+      return values(self.todos).filter((todo) => !todo.done).length;
+    },
+    get completedCount() {
+      return values(self.todos).filter((todo) => todo.done).length;
+    },
+  }))
   .actions((self) => ({
     addTodo(id, name) {
       self.todos.set(id, Todo.create({ name }));

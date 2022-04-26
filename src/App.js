@@ -14,6 +14,10 @@ const App = observer((props) => (
     {values(props.store.todos).map((todo, idx) => (
       <TodoView key={idx} todo={todo} />
     ))}
+
+    <div>
+      {props.store.pendingCount} pending, {props.store.completedCount} completed
+    </div>
   </div>
 ));
 
