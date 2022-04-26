@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-import { getSnapshot } from "mobx-state-tree";
+import "./ReactotronConfig";
+
 import { store } from "./models/model";
 
-store.addTodo(1, "Eat a cake");
-store.todos.get(1).toggle();
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<div>{JSON.stringify(getSnapshot(store))}</div>);
+root.render(<App store={store} />);

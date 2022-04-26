@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree";
+import Reactotron from "reactotron-react-js";
 
 export const Todo = types
   .model({
@@ -33,3 +34,6 @@ const RootStore = types
 export const store = RootStore.create({
   users: {}, // users is not required really since arrays and maps are optional by default since MST3
 });
+
+// let reactotron-mst know about it
+Reactotron.trackMstNode(store);

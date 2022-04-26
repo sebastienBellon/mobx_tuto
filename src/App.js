@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { observer } from "mobx-react-lite";
+import { values } from "mobx";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import TodoView from "./components/TodoView/TodoView";
+
+let id = 1;
+const randomId = () => ++id;
+
+const App = observer((props) => (
+  <div>
+    <button onClick={(e) => props.store.addTodo(randomId(), "New Task")}>
+      Add Task
+    </button>
+    {values(props.store.todos).map((todo, idx) => (
+      <TodoView key={idx} todo={todo} />
+    ))}
+  </div>
+));
 
 export default App;
