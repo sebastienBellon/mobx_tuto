@@ -1,23 +1,14 @@
 import { observer } from "mobx-react-lite";
 import { values } from "mobx";
 
-import TodoView from "./components/TodoView/TodoView";
-
-let id = 1;
-const randomId = () => ++id;
+import WishListView from "./components/WishListView";
 
 const App = observer((props) => (
   <div>
-    <button onClick={(e) => props.store.addTodo(randomId(), "New Task")}>
-      Add Task
-    </button>
-    {values(props.store.todos).map((todo, idx) => (
-      <TodoView key={idx} todo={todo} />
-    ))}
-
-    <div>
-      {props.store.pendingCount} pending, {props.store.completedCount} completed
-    </div>
+    <header>
+      <h1>WhishList</h1>
+    </header>
+    <WishListView whishList={props.whishList} />
   </div>
 ));
 

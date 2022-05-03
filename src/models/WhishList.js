@@ -15,6 +15,9 @@ export const WhishListItem = types
     changePrice(newPrice) {
       self.price = newPrice;
     },
+    changeImage(newImage) {
+      self.image = newImage;
+    },
   }));
 
 export const WishList = types
@@ -25,22 +28,12 @@ export const WishList = types
     add(item) {
       self.items.push(item);
     },
+  }))
+  .views((self) => ({
+    get totalPrice() {
+      return self.items.reduce((sum, entry) => sum + entry.price, 0);
+    },
   }));
-
-// export const Todo = types
-//   .model({
-//     name: types.optional(types.string, ""),
-//     done: types.optional(types.boolean, false),
-//   })
-//   .actions((self) => ({
-//     setName(newName) {
-//       self.name = newName;
-//     },
-
-//     toggle() {
-//       self.done = !self.done;
-//     },
-//   }));
 
 // export const User = types.model({
 //   name: types.optional(types.string, ""),
