@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./ReactotronConfig";
 
-import { onSnapshot } from "mobx-state-tree";
+import { getSnapshot, onSnapshot } from "mobx-state-tree";
 
 import "./assets/index.css";
 
@@ -36,11 +36,29 @@ if (localStorage.getItem("wishlistapp")) {
   }
 }
 
-const whishList = WishList.create(initialState);
+let whishList = WishList.create(initialState);
 
 onSnapshot(whishList, (snapshot) => {
   localStorage.setItem("wishlistapp", JSON.stringify(snapshot));
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App whishList={whishList} />);
+function renderApp() {
+  root.render(<App whishList={whishList} />);
+}
+
+renderApp();
+
+if (module.hot) {
+  module.hot.accept(["./App"], () => {
+    //new components => hot reloading
+    renderApp();
+  });
+
+  module.hot.accept(["./models/WhishList.js"], () => {
+    // new model definitions => we want to preserve the current state
+    const snapshot = getSnapshot(whishList);
+    whishList = WishList.create(snapshot);
+    renderApp();
+  });
+}
