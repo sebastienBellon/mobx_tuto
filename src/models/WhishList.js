@@ -1,6 +1,4 @@
 import { types, getParent, destroy } from "mobx-state-tree";
-import Reactotron from "reactotron-react-js";
-import { values } from "mobx";
 
 export const WhishListItem = types
   .model({
@@ -40,36 +38,3 @@ export const WishList = types
       return self.items.reduce((sum, entry) => sum + entry.price, 0);
     },
   }));
-
-// export const User = types.model({
-//   name: types.optional(types.string, ""),
-// });
-
-// const RootStore = types
-//   .model({
-//     users: types.map(User),
-//     todos: types.optional(types.map(Todo), {}),
-//   })
-//   .views((self) => ({
-//     get pendingCount() {
-//       return values(self.todos).filter((todo) => !todo.done).length;
-//     },
-//     get completedCount() {
-//       return values(self.todos).filter((todo) => todo.done).length;
-//     },
-//     getTodosWhereDoneIs(done) {
-//       return values(self.todos).filter((todo) => todo.done === done);
-//     },
-//   }))
-//   .actions((self) => ({
-//     addTodo(id, name) {
-//       self.todos.set(id, Todo.create({ name }));
-//     },
-//   }));
-
-// export const store = RootStore.create({
-//   users: {}, // users is not required really since arrays and maps are optional by default since MST3
-// });
-
-// // let reactotron-mst know about it
-// Reactotron.trackMstNode(store);

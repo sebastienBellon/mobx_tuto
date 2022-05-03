@@ -7,7 +7,7 @@ const WishListItemEdit = ({ item }) => {
   };
 
   const onPriceChange = (event) => {
-    const price = parseInt(event.target.value);
+    const price = parseFloat(event.target.value);
     if (!isNaN(price)) {
       item.changePrice(price);
     }
