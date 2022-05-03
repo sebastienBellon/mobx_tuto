@@ -6,11 +6,12 @@ import WishListItemEdit from "./WishListItemEdit";
 
 const WishListItemView = ({ item }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [snap, setSnap] = useState(clone(item));
+  const [snap, setSnap] = useState(null);
 
   const onSubmit = () => {
     applySnapshot(item, getSnapshot(snap));
     setIsEditing(false);
+    setSnap(null);
   };
 
   return (
