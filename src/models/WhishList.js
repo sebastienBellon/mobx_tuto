@@ -1,4 +1,4 @@
-import { types } from "mobx-state-tree";
+import { types, getParent, destroy } from "mobx-state-tree";
 import Reactotron from "reactotron-react-js";
 import { values } from "mobx";
 
@@ -18,6 +18,9 @@ export const WhishListItem = types
     changeImage(newImage) {
       self.image = newImage;
     },
+    remove() {
+      getParent(self, 2).remove(self); // 2 means we want to go up two parents in the tree since once will be invoking the method remove on the items array but we want to invoke the method on WhishList
+    },
   }));
 
 export const WishList = types
@@ -27,6 +30,9 @@ export const WishList = types
   .actions((self) => ({
     add(item) {
       self.items.push(item);
+    },
+    remove(item) {
+      destroy(item); //self.items.splice(self.items.indexOf(item), 1); Equivalent method to remove an item on the tree
     },
   }))
   .views((self) => ({

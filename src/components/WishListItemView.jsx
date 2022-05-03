@@ -45,6 +45,14 @@ const WishListItemView = ({ item }) => {
             >
               Edit
             </button>
+
+            <button
+              onClick={() => {
+                item.remove();
+              }}
+            >
+              Delete
+            </button>
           </span>
         </li>
       )}
