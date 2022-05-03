@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./ReactotronConfig";
 
+import "./assets/index.css";
+
 import App from "./App";
 
 import { WishList } from "./models/WhishList";
@@ -9,16 +11,16 @@ import { WishList } from "./models/WhishList";
 const whishList = WishList.create({
   items: [
     {
-      name: "Chronicles of seb",
-      price: 10,
+      name: "LEGO Mindstorms EV3",
+      price: 349.95,
       image:
-        "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+        "https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg",
     },
     {
-      name: "Chronicles of Pascal",
-      price: 20,
+      name: "Miracles - C.S. Lewis",
+      price: 12.91,
       image:
-        "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+        "https://images-na.ssl-images-amazon.com/images/I/51a7xaMpneL._SX329_BO1,204,203,200_.jpg",
     },
   ],
 });

@@ -19,13 +19,13 @@ const WishListItemView = ({ item }) => {
       {isEditing ? (
         <li className="item">
           <WishListItemEdit item={snap} />
-          <button onClick={onSubmit}>Submit</button>
+          <button onClick={onSubmit}>💾</button>
           <button
             onClick={() => {
               setIsEditing(setIsEditing(false));
             }}
           >
-            Cancel
+            ❎
           </button>
         </li>
       ) : (
@@ -35,7 +35,6 @@ const WishListItemView = ({ item }) => {
           )}
           <h3>{item.name}</h3>
           <span>{item.price}</span>
-          <br />
           <span>
             <button
               onClick={() => {
@@ -43,7 +42,7 @@ const WishListItemView = ({ item }) => {
                 setSnap(clone(item));
               }}
             >
-              Edit
+              ✏
             </button>
 
             <button
@@ -51,7 +50,7 @@ const WishListItemView = ({ item }) => {
                 item.remove();
               }}
             >
-              Delete
+              ❎
             </button>
           </span>
         </li>

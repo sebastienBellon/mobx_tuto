@@ -2,6 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 
 import WishListItemView from "./WishListItemView";
+import WhisListItemEntry from "./WishListItemEntry";
 
 const WishListView = ({ whishList }) => {
   return (
@@ -12,6 +13,7 @@ const WishListView = ({ whishList }) => {
         ))}
       </ul>
       Total: {whishList.totalPrice}
+      <WhisListItemEntry whishList={whishList} />
     </div>
   );
 };
