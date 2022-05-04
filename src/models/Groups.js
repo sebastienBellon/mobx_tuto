@@ -1,4 +1,4 @@
-import { types, flow } from "mobx-state-tree";
+import { types, flow, applySnapshot } from "mobx-state-tree";
 
 import { WishList } from "./WishList";
 
@@ -25,6 +25,15 @@ export const Group = types
     users: types.map(User),
   })
   .actions((self) => ({
+    afterCreate() {
+      // automatically fetch data automatically after the creation of the mobx store
+      self.load();
+    },
+    load: flow(function* flow() {
+      // fetch data from the server
+      const response = yield window.fetch(`http://localhost:3001/users`);
+      applySnapshot(self.users, yield response.json());
+    }),
     drawLots() {
       const allUsers = Array.from(self.users.values());
 
