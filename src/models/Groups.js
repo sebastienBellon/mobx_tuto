@@ -31,22 +31,25 @@ export const Group = types
         // automatically fetch data automatically after the creation of the mobx store
         self.load();
       },
-      load: flow(function* flow() {
+      load: flow(function* load() {
         // fetch data from the server
-        const controller = new AbortController();
+        controller = AbortController && new AbortController();
         try {
           // abort the previous request if it was still pending
           const response = yield window.fetch(`http://localhost:3001/users`, {
-            signal: controller.signal,
+            signal: controller && controller.signal,
           });
           applySnapshot(self.users, yield response.json());
           console.log("success");
         } catch (e) {
-          console.log("aborted", e);
+          console.log("aborted", e.name);
         }
       }),
       reload() {
-        // abord current request
+        if (controller) {
+          // abord current request
+          controller.abort();
+        }
         self.load();
       },
       beforeDestroy() {
