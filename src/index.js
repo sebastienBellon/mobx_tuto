@@ -2,49 +2,66 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./ReactotronConfig";
 
-import { getSnapshot, onSnapshot } from "mobx-state-tree";
+import { addMiddleware, getSnapshot, onSnapshot } from "mobx-state-tree";
 
 import "./assets/index.css";
 
 import App from "./App";
 
-import { WishList } from "./models/WhishList";
+import { Group } from "./models/Groups";
 
 let initialState = {
-  items: [
-    {
-      name: "LEGO Mindstorms EV3",
-      price: 349.95,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/71CpQw%2BufNL._SL1000_.jpg",
+  users: {
+    a342: {
+      id: "a342",
+      name: "Homer",
+      gender: "m",
     },
-    {
-      name: "Miracles - C.S. Lewis",
-      price: 12.91,
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51a7xaMpneL._SX329_BO1,204,203,200_.jpg",
+    "5fc2": {
+      id: "5fc2",
+      name: "Marge",
+      gender: "f",
     },
-  ],
+    "663b": {
+      id: "663b",
+      name: "Bart",
+      gender: "m",
+    },
+    "65aa": {
+      id: "65aa",
+      name: "Maggie",
+      gender: "f",
+    },
+    ba32: {
+      id: "ba32",
+      name: "Lisa",
+      gender: "f",
+    },
+  },
 };
 
-if (localStorage.getItem("wishlistapp")) {
-  let getObject = localStorage.getItem("wishlistapp");
+if (localStorage.getItem("groupapp")) {
+  let getObject = localStorage.getItem("groupapp");
   const json = JSON.parse(getObject);
-  if (WishList.is(json)) {
+  if (Group.is(json)) {
     // this is to ensure that our localstrorage still meet the structure of the tree
     initialState = json;
   }
 }
 
-let whishList = WishList.create(initialState);
+let group = Group.create(initialState);
+addMiddleware(group, (call, next) => {
+  console.log(`[${call.type}] ${call.name}`);
+  return next(call);
+});
 
-onSnapshot(whishList, (snapshot) => {
-  localStorage.setItem("wishlistapp", JSON.stringify(snapshot));
+onSnapshot(group, (snapshot) => {
+  localStorage.setItem("groupapp", JSON.stringify(snapshot));
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 function renderApp() {
-  root.render(<App whishList={whishList} />);
+  root.render(<App group={group} />);
 }
 
 renderApp();
@@ -55,10 +72,10 @@ if (module.hot) {
     renderApp();
   });
 
-  module.hot.accept(["./models/WhishList.js"], () => {
+  module.hot.accept(["./models/Groups.js"], () => {
     // new model definitions => we want to preserve the current state
-    const snapshot = getSnapshot(whishList);
-    whishList = WishList.create(snapshot);
+    const snapshot = getSnapshot(group);
+    group = Group.create(snapshot);
     renderApp();
   });
 }
