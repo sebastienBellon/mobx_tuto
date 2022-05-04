@@ -9,8 +9,9 @@ import "./assets/index.css";
 import App from "./App";
 
 import { Group } from "./models/Groups";
+import { store } from "./models/Store";
 
-let initialState = { users: {} };
+//let initialState = { users: {} };
 
 // if (localStorage.getItem("groupapp")) {
 //   let getObject = localStorage.getItem("groupapp");
@@ -21,7 +22,7 @@ let initialState = { users: {} };
 //   }
 // }
 
-let group = (window.group = Group.create(initialState));
+//let group = (window.group = Group.create(initialState));
 // addMiddleware(group, (call, next) => {
 //   console.log(`[${call.type}] ${call.name}`);
 //   return next(call);
@@ -33,7 +34,7 @@ let group = (window.group = Group.create(initialState));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 function renderApp() {
-  root.render(<App group={group} />);
+  root.render(<App group={store} />);
 }
 
 renderApp();
@@ -46,8 +47,8 @@ if (module.hot) {
 
   module.hot.accept(["./models/Groups"], () => {
     // new model definitions => we want to preserve the current state
-    const snapshot = getSnapshot(group);
-    group = window.group = Group.create(snapshot);
+    const snapshot = getSnapshot(store);
+    store = window.store = Group.create(snapshot);
     renderApp();
   });
 }
