@@ -4,7 +4,7 @@ import { clone, getSnapshot, applySnapshot } from "mobx-state-tree";
 
 import WishListItemEdit from "./WishListItemEdit";
 
-const WishListItemView = ({ item }) => {
+const WishListItemView = ({ item, readonly }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [snap, setSnap] = useState(null);
 
@@ -33,24 +33,26 @@ const WishListItemView = ({ item }) => {
           {item.image && <img src={item.image} alt={item.name} />}
           <h3>{item.name}</h3>
           <span>{item.price} $</span>
-          <span>
-            <button
-              onClick={() => {
-                setIsEditing(!isEditing);
-                setSnap(clone(item));
-              }}
-            >
-              ✏
-            </button>
+          {!readonly && (
+            <span>
+              <button
+                onClick={() => {
+                  setIsEditing(!isEditing);
+                  setSnap(clone(item));
+                }}
+              >
+                ✏
+              </button>
 
-            <button
-              onClick={() => {
-                item.remove();
-              }}
-            >
-              ❎
-            </button>
-          </span>
+              <button
+                onClick={() => {
+                  item.remove();
+                }}
+              >
+                ❎
+              </button>
+            </span>
+          )}
         </li>
       )}
     </>

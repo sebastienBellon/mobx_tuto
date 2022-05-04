@@ -1,6 +1,6 @@
 import { types, getParent, destroy } from "mobx-state-tree";
 
-export const WhishListItem = types
+export const WishListItem = types
   .model({
     name: types.string,
     price: types.number,
@@ -23,7 +23,7 @@ export const WhishListItem = types
 
 export const WishList = types
   .model({
-    items: types.optional(types.array(WhishListItem), []),
+    items: types.optional(types.array(WishListItem), []),
   })
   .actions((self) => ({
     add(item) {

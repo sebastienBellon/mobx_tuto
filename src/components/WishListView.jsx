@@ -4,16 +4,16 @@ import { observer } from "mobx-react-lite";
 import WishListItemView from "./WishListItemView";
 import WhisListItemEntry from "./WishListItemEntry";
 
-const WishListView = ({ whishList }) => {
+const WishListView = ({ wishList, readonly }) => {
   return (
     <div className="list">
       <ul>
-        {whishList.items.map((item, idx) => (
-          <WishListItemView key={idx} item={item} />
+        {wishList.items.map((item, idx) => (
+          <WishListItemView key={idx} item={item} readonly={readonly} />
         ))}
       </ul>
-      Total: {whishList.totalPrice}
-      <WhisListItemEntry whishList={whishList} />
+      Total: {wishList.totalPrice}
+      {!readonly && <WhisListItemEntry wishList={wishList} />}
     </div>
   );
 };

@@ -6,6 +6,20 @@ import logo from "./assets/santa-claus.png";
 
 import WishListView from "./components/WishListView";
 
+const User = observer(({ user }) => {
+  return (
+    <div>
+      <WishListView wishList={user.wishList} />
+      <button onClick={user.getSuggestions}>Suggestions</button>
+      <hr />
+      <h2>{user.recipient ? user.recipient.name : ""}</h2>
+      {user.recipient && (
+        <WishListView wishList={user.recipient.wishList} readonly />
+      )}
+    </div>
+  );
+});
+
 const App = observer(({ group }) => {
   const [user, setUser] = useState(null);
 
@@ -28,8 +42,8 @@ const App = observer(({ group }) => {
           </option>
         ))}
       </select>
-      {user && <WishListView whishList={user.wishList} />}
-      {user && <button onClick={user.getSuggestions}>Suggestions</button>}
+      <button onClick={group.drawLots}>Draw lots</button>
+      {user && <User user={user} />}
     </div>
   );
 });

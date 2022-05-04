@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 
 import WishListItemEdit from "./WishListItemEdit";
-import { WhishListItem } from "../models/WhishList";
+import { WishListItem } from "../models/WishList";
 
-const WhisListItemEntry = ({ whishList }) => {
+const WisListItemEntry = ({ wishList }) => {
   const [entry, setEntry] = useState(
-    WhishListItem.create({
+    WishListItem.create({
       name: "",
       price: 0,
     })
   );
 
   const onAdd = () => {
-    whishList.add(entry);
+    wishList.add(entry);
     setEntry(
-      WhishListItem.create({
+      WishListItem.create({
         name: "",
         price: 0,
       })
@@ -30,4 +30,4 @@ const WhisListItemEntry = ({ whishList }) => {
   );
 };
 
-export default WhisListItemEntry;
+export default WisListItemEntry;
