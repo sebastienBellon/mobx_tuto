@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { observer } from "mobx-react-lite";
 
 import WishListItemEdit from "./WishListItemEdit";
 import { WishListItem } from "../models/WishList";

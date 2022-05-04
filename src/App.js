@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { values } from "mobx";
 
 import logo from "./assets/santa-claus.png";
 
