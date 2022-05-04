@@ -22,14 +22,14 @@ let initialState = { users: {} };
 // }
 
 let group = (window.group = Group.create(initialState));
-addMiddleware(group, (call, next) => {
-  console.log(`[${call.type}] ${call.name}`);
-  return next(call);
-});
+// addMiddleware(group, (call, next) => {
+//   console.log(`[${call.type}] ${call.name}`);
+//   return next(call);
+// });
 
-onSnapshot(group, (snapshot) => {
-  localStorage.setItem("groupapp", JSON.stringify(snapshot));
-});
+// onSnapshot(group, (snapshot) => {
+//   localStorage.setItem("groupapp", JSON.stringify(snapshot));
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 function renderApp() {
@@ -44,7 +44,7 @@ if (module.hot) {
     renderApp();
   });
 
-  module.hot.accept(["./models/Groups.js"], () => {
+  module.hot.accept(["./models/Groups"], () => {
     // new model definitions => we want to preserve the current state
     const snapshot = getSnapshot(group);
     group = window.group = Group.create(snapshot);
